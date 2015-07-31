@@ -8,90 +8,98 @@
 
 import Foundation
 
+public typealias NoMatch = UriMatcher.NoMatch
+
 public class UriMatcher {
-    public static let NO_MATCH = -1
+    public enum NoMatch : MatchedUri {
+        case NoMatch
+        
+        public func isEqual(another: MatchedUri) -> Bool {
+            guard another.dynamicType == self.dynamicType else {
+                return false
+            }
+            
+            return true
+        }
+    }
+    
+    public static let NO_MATCH = NoMatch.NoMatch
     
     static let ALPHA_SET = NSCharacterSet.decimalDigitCharacterSet().invertedSet
-    static let ALPHA_WILDCARD = "*"
-    static let NUMERIC_WILDCARD = "#"
-    static let TERMINAL = "!"
+    static let ALPHA_WILDCARD = "/*"
+    static let NUMERIC_WILDCARD = "/#"
     
-    private var matchTree : NSMutableDictionary
+    static private let REGEX_MATCH_START = "^"
+    static private let REGEX_MATCH_END = "$"
+    static private let REGEX_MATCH_NUMBERS = "/\\d+"
+    static private let REGEX_MATCH_ALPHA = "/\\d*[a-zA-Z][a-zA-Z0-9]*"
     
-    public required init(root: Int) {
-        self.matchTree = NSMutableDictionary()
-        self.matchTree[UriMatcher.TERMINAL] = root
+    private var uris : [String : MatchedUri] = [:]
+    
+    public required init() {
     }
     
-    public func addUri(uri: Uri, matchCode: Int) -> Bool {
-        let urlComponents = NSURLComponents(URL: uri, resolvingAgainstBaseURL: false)
-        let scheme = urlComponents!.scheme
-        let host = urlComponents!.host
-        let path = urlComponents!.path
-        let pathComponents = path != nil ? path!.pathComponents : [String]()
-        let allComponents = [scheme!, host!] + pathComponents
+    public func addUri(uri: Uri, matchedUri: MatchedUri) {
+        guard var uriString = uri.absoluteString.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding) else {
+            return
+        }
+        
+        var done = false
+        
+        // Search for and replace all alpha wildcards in the registered uri
+        while !done {
+            let range = self.rangeOfStringInUri(uriString, string: UriMatcher.ALPHA_WILDCARD)
+            if range == nil {
+                done = true
+                continue
+            }
+            
+            uriString.replaceRange(range!, with: UriMatcher.REGEX_MATCH_ALPHA)
+        }
+        
+        done = false
+        
+        // Search for and replace all numeric wildcards in the registered uri
+        while !done {
+            let range = self.rangeOfStringInUri(uriString, string: UriMatcher.NUMERIC_WILDCARD)
+            if range == nil {
+                done = true
+                continue
+            }
+            
+            uriString.replaceRange(range!, with: UriMatcher.REGEX_MATCH_NUMBERS)
+        }
+        
+        uriString = UriMatcher.REGEX_MATCH_START + uriString + UriMatcher.REGEX_MATCH_END
+        self.uris[uriString] = matchedUri
+    }
+    
+    public func match(uri: Uri) -> MatchedUri {
+        guard let uriString = uri.absoluteString.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding) else {
+            return UriMatcher.NO_MATCH
+        }
+        
+        for (registeredUri, matchCode) in self.uris {
+            guard let _ = uriString.rangeOfString(registeredUri, options: .RegularExpressionSearch, range: nil, locale: nil) else {
+                continue
+            }
+            
+            return matchCode
+        }
+        
+        return UriMatcher.NO_MATCH
+    }
+    
+    private func rangeOfStringInUri(uri: String, string : String) -> Range<String.Index>? {
+        return uri.rangeOfString(string)
+    }
+    
+}
 
-        var node : NSMutableDictionary? = self.matchTree
-        for urlComponent in allComponents {
-            let decodedComponent = urlComponent.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-            if decodedComponent == "/" {
-                continue
-            }
-            
-            node = self.appendURLComponent(decodedComponent!, node: node!)
-        }
-        
-        if node != nil  {
-            node![UriMatcher.TERMINAL] = matchCode
-        }
-        
-        return true
-    }
-    
-    public func match(uri: Uri) -> Int {
-        let urlComponents = NSURLComponents(URL: uri, resolvingAgainstBaseURL: false)
-        let scheme = urlComponents!.scheme
-        let host = urlComponents!.host
-        let path = urlComponents!.path
-        let pathComponents = path != nil ? path!.pathComponents : [String]()
-        let allComponents = [scheme!, host!] + pathComponents
-        
-        var node : NSMutableDictionary? = self.matchTree
-        for urlComponent in allComponents {
-            if urlComponent == "/" {
-                continue
-            }
-            
-            node = self.getMatchingNode(urlComponent, node: node!)
-            if node == nil {
-                break
-            }
-        }
-        
-        return node != nil ? node![UriMatcher.TERMINAL] as! Int : UriMatcher.NO_MATCH
-    }
-    
-    func appendURLComponent(urlComponent: String, node: NSMutableDictionary) -> NSMutableDictionary? {
-        var childNode = node[urlComponent] as? NSMutableDictionary
-        if childNode == nil {
-            childNode = NSMutableDictionary()
-            node[urlComponent] = childNode
-        }
-        
-        return childNode
-    }
-    
-    func getMatchingNode(urlComponent: String, node: NSMutableDictionary) -> NSMutableDictionary? {
-        let matchingNode = node[urlComponent]
-        
-        if matchingNode != nil {
-            return matchingNode as? NSMutableDictionary
-        }
-        
-        return ((self.isNumericURLComponent(urlComponent) ? node[UriMatcher.NUMERIC_WILDCARD] : node[UriMatcher.ALPHA_WILDCARD]) as? NSMutableDictionary)
-    }
-    
-    func isNumericURLComponent(urlComponent: String) -> Bool {
-        return (urlComponent.rangeOfCharacterFromSet(UriMatcher.ALPHA_SET)?.isEmpty)!
-    }
+public func ==(first: MatchedUri, second: MatchedUri) -> Bool {
+    return first.isEqual(second)
+}
+
+public protocol MatchedUri {
+    func isEqual(another: MatchedUri) -> Bool
 }

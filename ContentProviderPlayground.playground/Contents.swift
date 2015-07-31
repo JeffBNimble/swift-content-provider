@@ -21,35 +21,34 @@ func createObserver(type:NSObject.Type) -> ContentObserver {
 let cp = createObserver(CP.self)
 cp.onUpdate(NSURL(), operation: .Insert)
 
-var dict:[String:String] = ["Hi":"x", "There":"y"]
-
-
-let d2 = dict.map() { (key, value) in
-    return (key + "yo", value + "y")
+// Create an enum for the types of Uri's we want to match
+enum DataDragonUris : MatchedUri {
+    case Realm, Champions, ChampionSkins, ChampionSkinsForChampion, Champion, ChampionSkin
+    
+    func isEqual(another: MatchedUri) -> Bool {
+        guard let otherUri = another as? DataDragonUris else {
+            return false
+        }
+        
+        return otherUri.hashValue == self.hashValue
+    }
+    
 }
+// Create a UriMatcher and register some Uri's
+let matcher = UriMatcher()
+matcher.addUri(Uri(string: "content://io.nimblenoggin.LoLBookOfChampions.datadragon/realm")!, matchedUri: DataDragonUris.Realm)
+matcher.addUri(Uri(string: "content://io.nimblenoggin.LoLBookOfChampions.datadragon/champion")!, matchedUri: DataDragonUris.Champions)
+matcher.addUri(Uri(string: "content://io.nimblenoggin.LoLBookOfChampions.datadragon/championSkin")!, matchedUri: DataDragonUris.ChampionSkins)
+matcher.addUri(Uri(string: "content://io.nimblenoggin.LoLBookOfChampions.datadragon/championSkin/*")!, matchedUri: DataDragonUris.ChampionSkinsForChampion)
+matcher.addUri(Uri(string: "content://io.nimblenoggin.LoLBookOfChampions.datadragon/championSkin/*/#")!, matchedUri: DataDragonUris.ChampionSkin)
 
-let observers = ["Me":[1, 2, 3], "You":[4, 5, 6]]
-let y = observers.values.flatMap() {$0}
-print("\(y)")
-let x = observers.flatMap {$0.1}.filter() { (number) in number > 2 }
-print("\(x)")
-
-let matcher = UriMatcher(root: -1)
-matcher.addUri(Uri(string: "content://io.nimblenoggin.LoLBookOfChampions.datadragon/realm")!, matchCode: 1)
-matcher.addUri(Uri(string: "content://io.nimblenoggin.LoLBookOfChampions.datadragon/champion")!, matchCode: 2)
-matcher.addUri(Uri(string: "content://io.nimblenoggin.LoLBookOfChampions.datadragon/championSkin")!, matchCode: 3)
-
-var matchCode = matcher.match(Uri(string: "content://io.nimblenoggin.LoLBookOfChampions.datadragon/dogs")!)
-matchCode = matcher.match(Uri(string: "content://io.nimblenoggin.LoLBookOfChampions.datadragon/champion")!)
-
-let uriString = "content://io.nimblenoggin.LoLBookOfChampions.datadragon/champion/105"
-let registeredUri = "content://io.nimblenoggin.LoLBookOfChampions.datadragon/champion/#/#"
-var uri : String = registeredUri
-
-let numericWildcardRange = registeredUri.rangeOfString("#")
-numericWildcardRange?.indices
-
-uri.replaceRange(numericWildcardRange!, with: "\\d+$")
-uri = "^" + uri
-var range = uriString.rangeOfString(uri, options: NSStringCompareOptions.RegularExpressionSearch, range: nil, locale: nil)
-uri.rangeOfString("#", options: NSStringCompareOptions.RegularExpressionSearch, range: nil, locale: nil)
+// Try to match some Uri's
+matcher.match(Uri(string: "content://io.nimblenoggin.LoLBookOfChampions.datadragon/dogs")!) == NoMatch.NoMatch
+matcher.match(Uri(string: "content://io.nimblenoggin.LoLBookOfChampions.datadragon/champion")!) == DataDragonUris.Champions
+matcher.match(Uri(string: "content://io.nimblenoggin.LoLBookOfChampions.datadragon/championSkin")!) == DataDragonUris.ChampionSkins
+matcher.match(Uri(string: "content://io.nimblenoggin.LoLBookOfChampions.datadragon/championSkins")!) == NoMatch.NoMatch
+matcher.match(Uri(string: "content://io.nimblenoggin.LoLBookOfChampions.datadragon/championSkin/Annie")!) == DataDragonUris.ChampionSkinsForChampion
+matcher.match(Uri(string: "content://io.nimblenoggin.LoLBookOfChampions.datadragon/championSkin/A1")!) == DataDragonUris.ChampionSkinsForChampion
+matcher.match(Uri(string: "https://io.nimblenoggin.LoLBookOfChampions.datadragon/champion")!) == NoMatch.NoMatch
+matcher.match(Uri(string: "content://io.nimblenoggin.LoLBookOfChampions.datadragon/championSkin/Annie/105")!) == DataDragonUris.ChampionSkin
+matcher.match(Uri(string: "content://io.nimblenoggin.LoLBookOfChampions.datadragon/championSkin/Annie/106/dark")!) == NoMatch.NoMatch
