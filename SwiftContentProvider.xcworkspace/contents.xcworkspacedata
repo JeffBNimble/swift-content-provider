@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:SwiftContentProvider.xcodeproj">
+   </FileRef>
+   <Group
+      location = "container:"
+      name = "External">
+      <FileRef
+         location = "group:Carthage/Checkouts/CocoaLumberjack/Lumberjack.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Carthage/Checkouts/swift-protocols-sqlite/SwiftProtocolsSQLite.xcodeproj">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:ContentProviderPlayground.playground">
+   </FileRef>
+</Workspace>
