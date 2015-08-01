@@ -1,2 +1,3 @@
 github "CocoaLumberjack/CocoaLumberjack" "4dc87df698af9378051f5b5ae915dacb16f75ec5"
+github "JeffBNimble/swift-protocols-core" "4a179514808b4052674a00853fc196c20d6d0b36"
 github "JeffBNimble/swift-protocols-sqlite" "1be909d8393730e5b4cbb25e4960ef5037e163f3"

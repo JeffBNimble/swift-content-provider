@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A52E80C91B6C54E200DE54E7 /* SwiftProtocolsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52E80C81B6C54E200DE54E7 /* SwiftProtocolsCore.framework */; };
 		A5362D9F1B6448B900769C78 /* ContentObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5362D9E1B6448B900769C78 /* ContentObserver.swift */; };
 		A5362DA11B644A8E00769C78 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5362DA01B644A8E00769C78 /* ContentProvider.swift */; };
 		A5B857181B643FC000D19C1B /* SwiftContentProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B857171B643FC000D19C1B /* SwiftContentProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A52E80C81B6C54E200DE54E7 /* SwiftProtocolsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtocolsCore.framework; path = "Carthage/Checkouts/swift-protocols-core/build/Debug-iphoneos/SwiftProtocolsCore.framework"; sourceTree = "<group>"; };
 		A5362D9E1B6448B900769C78 /* ContentObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentObserver.swift; sourceTree = "<group>"; };
 		A5362DA01B644A8E00769C78 /* ContentProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentProvider.swift; sourceTree = "<group>"; };
 		A5B857141B643FC000D19C1B /* SwiftContentProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftContentProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A52E80C91B6C54E200DE54E7 /* SwiftProtocolsCore.framework in Frameworks */,
 				A5B857301B644EB600D19C1B /* CocoaLumberjackSwift.framework in Frameworks */,
 				A5B857311B644EB600D19C1B /* SwiftProtocolsSQLite.framework in Frameworks */,
 			);
@@ -91,6 +94,7 @@
 		A5B8570A1B643FC000D19C1B = {
 			isa = PBXGroup;
 			children = (
+				A52E80C81B6C54E200DE54E7 /* SwiftProtocolsCore.framework */,
 				A5B8572E1B644EB600D19C1B /* CocoaLumberjackSwift.framework */,
 				A5B8572F1B644EB600D19C1B /* SwiftProtocolsSQLite.framework */,
 				A5B857161B643FC000D19C1B /* SwiftContentProvider */,
@@ -370,6 +374,7 @@
 					"$(SRCROOT)/**",
 					"$(PROJECT_DIR)/Carthage/Checkouts/CocoaLumberjack/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/Carthage/Checkouts/swift-protocols-sqlite/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Carthage/Checkouts/swift-protocols-core/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = "SwiftContentProvider/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -393,6 +398,7 @@
 					"$(SRCROOT)/**",
 					"$(PROJECT_DIR)/Carthage/Checkouts/CocoaLumberjack/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/Carthage/Checkouts/swift-protocols-sqlite/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Carthage/Checkouts/swift-protocols-core/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = "SwiftContentProvider/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

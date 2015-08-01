@@ -10,6 +10,7 @@
 //
 
 import Foundation
+import SwiftProtocolsCore
 import SwiftProtocolsSQLite
 
 public enum ContentProviderError : ErrorType {
@@ -21,10 +22,10 @@ public class ContentResolver {
     private var activeContentProviderRegistry : [String : ContentProvider]
     private let contentAuthorityBase : String
     private var contentObservers : [String : [ContentRegistration]]
-    private let contentProviderFactory : ContentProviderFactory
+    private let contentProviderFactory : TypedFactory
     private var contentRegistrations : [String : NSObject.Type]
     
-    public required init(contentProviderFactory: ContentProviderFactory, contentAuthorityBase: String, contentRegistrations: [String : NSObject.Type] ) {
+    public required init(contentProviderFactory: TypedFactory, contentAuthorityBase: String, contentRegistrations: [String : NSObject.Type] ) {
         self.contentProviderFactory = contentProviderFactory
         self.contentAuthorityBase = contentAuthorityBase
         self.contentRegistrations = contentRegistrations
@@ -124,7 +125,7 @@ public class ContentResolver {
         
         var contentProvider = self.activeContentProviderRegistry[contentAuthorityUri]
         if contentProvider == nil {
-            contentProvider = self.contentProviderFactory.createContentProvider(self.contentRegistrations[contentAuthorityUri]!)
+            contentProvider = self.contentProviderFactory.create(self.contentRegistrations[contentAuthorityUri]!)
             contentProvider?.contentResolver = self
             contentProvider?.onCreate()
             self.activeContentProviderRegistry[contentAuthorityUri] = contentProvider
