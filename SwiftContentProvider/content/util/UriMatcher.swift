@@ -8,6 +8,10 @@
 
 import Foundation
 
+public enum UriMatchError : ErrorType {
+    case UriNotMatched
+}
+
 public typealias NoMatch = UriMatcher.NoMatch
 
 public class UriMatcher {
