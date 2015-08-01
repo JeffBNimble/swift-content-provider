@@ -15,7 +15,7 @@ import SwiftProtocolsSQLite
 public typealias Uri = NSURL
 
 public protocol ContentProvider {
-    var contentResolver : ContentResolver { get set }
+    var contentResolver : ContentResolver? { get set }
     
     /// delete: Delete zero or more rows
     /// Parameter uri: The identifying Uri to be deleted
@@ -38,7 +38,7 @@ public protocol ContentProvider {
     /// Parameter values: A dictionary of column names -> values that will be inserted
     /// Throws: A SQL error if the SQL statement fails
     /// Returns: The specific content Uri that was inserted
-    func insert(uri: Uri, values: [String:AnyObject]) throws -> NSURL
+    func insert(uri: Uri, values: [String:AnyObject]) throws -> Uri
     
     /// onCreate: Invoked when the ContentProvider is initially created
     func onCreate()
@@ -53,7 +53,12 @@ public protocol ContentProvider {
     /// Parameter sort: A string containing the order by columns
     /// Throws: A SQL error if the SQL statement fails
     /// Returns: A Cursor of query results
-    func query(uri: Uri, projection:[String]?, selection: String?, selectionArgs: [AnyObject]?, groupBy: String?, having: String?, sort: String?) throws -> Cursor
+    func query(uri: Uri, projection:[String]?,
+        selection: String?,
+        selectionArgs: [AnyObject]?,
+        groupBy: String?,
+        having: String?,
+        sort: String?) throws -> Cursor
     
     /// query: Query the content
     /// Parameter uri: The identifying Uri to be queried
@@ -65,7 +70,13 @@ public protocol ContentProvider {
     /// Parameter sort: A string containing the order by columns
     /// Throws: A SQL error if the SQL statement fails
     /// Returns: A Cursor of query results
-    func query(uri: Uri, projection:[String]?, selection: String?, selectionArgs: [String:AnyObject]?, groupBy: String?, having: String?, sort: String?) throws -> Cursor
+    func query(uri: Uri,
+        projection:[String]?,
+        selection: String?,
+        selectionArgs: [String:AnyObject]?,
+        groupBy: String?,
+        having: String?,
+        sort: String?) throws -> Cursor
     
     /// update: Update zero or more rows
     /// Parameter uri: The identifying Uri to be updated

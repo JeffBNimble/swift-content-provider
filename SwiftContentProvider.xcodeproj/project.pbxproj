@@ -15,7 +15,6 @@
 		A5B857241B643FC000D19C1B /* SwiftContentProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B857231B643FC000D19C1B /* SwiftContentProviderTests.swift */; };
 		A5B857301B644EB600D19C1B /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5B8572E1B644EB600D19C1B /* CocoaLumberjackSwift.framework */; };
 		A5B857311B644EB600D19C1B /* SwiftProtocolsSQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5B8572F1B644EB600D19C1B /* SwiftProtocolsSQLite.framework */; };
-		A5B857331B64660900D19C1B /* ContentProviderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B857321B64660900D19C1B /* ContentProviderFactory.swift */; };
 		A5B857351B64728400D19C1B /* ContentResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B857341B64728400D19C1B /* ContentResolver.swift */; };
 		A5B857381B6567D700D19C1B /* UriMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B857371B6567D700D19C1B /* UriMatcher.swift */; };
 /* End PBXBuildFile section */
@@ -42,7 +41,6 @@
 		A5B857251B643FC000D19C1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5B8572E1B644EB600D19C1B /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = "Carthage/Checkouts/CocoaLumberjack/build/Debug-iphoneos/CocoaLumberjackSwift.framework"; sourceTree = "<group>"; };
 		A5B8572F1B644EB600D19C1B /* SwiftProtocolsSQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtocolsSQLite.framework; path = "Carthage/Checkouts/swift-protocols-sqlite/build/Debug-iphoneos/SwiftProtocolsSQLite.framework"; sourceTree = "<group>"; };
-		A5B857321B64660900D19C1B /* ContentProviderFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentProviderFactory.swift; sourceTree = "<group>"; };
 		A5B857341B64728400D19C1B /* ContentResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentResolver.swift; sourceTree = "<group>"; };
 		A5B857371B6567D700D19C1B /* UriMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UriMatcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,7 +82,6 @@
 				A5B857361B6567BE00D19C1B /* util */,
 				A5362D9E1B6448B900769C78 /* ContentObserver.swift */,
 				A5362DA01B644A8E00769C78 /* ContentProvider.swift */,
-				A5B857321B64660900D19C1B /* ContentProviderFactory.swift */,
 				A5B857341B64728400D19C1B /* ContentResolver.swift */,
 			);
 			name = content;
@@ -195,6 +192,7 @@
 		A5B8570B1B643FC000D19C1B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = nimbleNoggin.io;
 				TargetAttributes = {
@@ -248,7 +246,6 @@
 			files = (
 				A5362DA11B644A8E00769C78 /* ContentProvider.swift in Sources */,
 				A5B857351B64728400D19C1B /* ContentResolver.swift in Sources */,
-				A5B857331B64660900D19C1B /* ContentProviderFactory.swift in Sources */,
 				A5B857381B6567D700D19C1B /* UriMatcher.swift in Sources */,
 				A5362D9F1B6448B900769C78 /* ContentObserver.swift in Sources */,
 			);
