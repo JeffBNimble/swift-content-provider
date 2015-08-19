@@ -17,20 +17,23 @@ public enum ContentProviderError : ErrorType {
     case NoRegisteredContentProvider
 }
 
-public class ContentResolver {
+@objc
+public class ContentResolver : NSObject {
     
     private var activeContentProviderRegistry : [String : ContentProvider]
     private let contentAuthorityBase : String
     private var contentObservers : [String : [ContentRegistration]]
-    private let contentProviderFactory : TypedFactory
+    private let contentProviderFactory : ContentProviderFactory
     private var contentRegistrations : [String : NSObject.Type]
     
-    public required init(contentProviderFactory: TypedFactory, contentAuthorityBase: String, contentRegistrations: [String : NSObject.Type] ) {
+    public init(contentProviderFactory: ContentProviderFactory, contentAuthorityBase: String, contentRegistrations: [String : NSObject.Type] ) {
         self.contentProviderFactory = contentProviderFactory
         self.contentAuthorityBase = contentAuthorityBase
         self.contentRegistrations = contentRegistrations
         self.contentObservers = [:]
         self.activeContentProviderRegistry = [:]
+        
+        super.init()
         
         self.initialize()
     }
@@ -125,7 +128,7 @@ public class ContentResolver {
         
         var contentProvider = self.activeContentProviderRegistry[contentAuthorityUri]
         if contentProvider == nil {
-            contentProvider = self.contentProviderFactory.create(self.contentRegistrations[contentAuthorityUri]!)
+            contentProvider = try self.contentProviderFactory.create(self.contentRegistrations[contentAuthorityUri]!)
             contentProvider?.contentResolver = self
             contentProvider?.onCreate()
             self.activeContentProviderRegistry[contentAuthorityUri] = contentProvider

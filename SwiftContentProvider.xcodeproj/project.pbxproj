@@ -10,6 +10,7 @@
 		A52E80C91B6C54E200DE54E7 /* SwiftProtocolsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52E80C81B6C54E200DE54E7 /* SwiftProtocolsCore.framework */; };
 		A5362D9F1B6448B900769C78 /* ContentObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5362D9E1B6448B900769C78 /* ContentObserver.swift */; };
 		A5362DA11B644A8E00769C78 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5362DA01B644A8E00769C78 /* ContentProvider.swift */; };
+		A59DE1661B8491B3004EF8DD /* ContentProviderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59DE1651B8491B3004EF8DD /* ContentProviderFactory.swift */; };
 		A5B857181B643FC000D19C1B /* SwiftContentProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B857171B643FC000D19C1B /* SwiftContentProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A5B8571F1B643FC000D19C1B /* SwiftContentProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5B857141B643FC000D19C1B /* SwiftContentProvider.framework */; };
 		A5B857241B643FC000D19C1B /* SwiftContentProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B857231B643FC000D19C1B /* SwiftContentProviderTests.swift */; };
@@ -33,6 +34,7 @@
 		A52E80C81B6C54E200DE54E7 /* SwiftProtocolsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtocolsCore.framework; path = "Carthage/Checkouts/swift-protocols-core/build/Debug-iphoneos/SwiftProtocolsCore.framework"; sourceTree = "<group>"; };
 		A5362D9E1B6448B900769C78 /* ContentObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentObserver.swift; sourceTree = "<group>"; };
 		A5362DA01B644A8E00769C78 /* ContentProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentProvider.swift; sourceTree = "<group>"; };
+		A59DE1651B8491B3004EF8DD /* ContentProviderFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentProviderFactory.swift; path = SwiftContentProvider/content/ContentProviderFactory.swift; sourceTree = SOURCE_ROOT; };
 		A5B857141B643FC000D19C1B /* SwiftContentProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftContentProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B857171B643FC000D19C1B /* SwiftContentProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftContentProvider.h; sourceTree = "<group>"; };
 		A5B857191B643FC000D19C1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				A5362D9E1B6448B900769C78 /* ContentObserver.swift */,
 				A5362DA01B644A8E00769C78 /* ContentProvider.swift */,
 				A5B857341B64728400D19C1B /* ContentResolver.swift */,
+				A59DE1651B8491B3004EF8DD /* ContentProviderFactory.swift */,
 			);
 			name = content;
 			path = Content;
@@ -247,6 +250,7 @@
 				A5362DA11B644A8E00769C78 /* ContentProvider.swift in Sources */,
 				A5B857351B64728400D19C1B /* ContentResolver.swift in Sources */,
 				A5B857381B6567D700D19C1B /* UriMatcher.swift in Sources */,
+				A59DE1661B8491B3004EF8DD /* ContentProviderFactory.swift in Sources */,
 				A5362D9F1B6448B900769C78 /* ContentObserver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

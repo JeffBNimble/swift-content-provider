@@ -14,7 +14,8 @@ public enum UriMatchError : ErrorType {
 
 public typealias NoMatch = UriMatcher.NoMatch
 
-public class UriMatcher {
+@objc
+public class UriMatcher : NSObject {
     public enum NoMatch : MatchedUri {
         case NoMatch
         
@@ -40,11 +41,12 @@ public class UriMatcher {
     
     private var uris : [String : MatchedUri] = [:]
     
-    public required init() {
+    public required override init() {
+        super.init()
     }
     
     public func addUri(uri: Uri, matchedUri: MatchedUri) {
-        guard var uriString = uri.absoluteString.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding) else {
+        guard var uriString = uri.absoluteString.stringByRemovingPercentEncoding else {
             return
         }
         
@@ -79,7 +81,7 @@ public class UriMatcher {
     }
     
     public func match(uri: Uri) -> MatchedUri {
-        guard let uriString = uri.absoluteString.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding) else {
+        guard let uriString = uri.absoluteString.stringByRemovingPercentEncoding else {
             return UriMatcher.NO_MATCH
         }
         
