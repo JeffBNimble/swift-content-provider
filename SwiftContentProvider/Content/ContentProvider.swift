@@ -17,6 +17,10 @@ public typealias Uri = NSURL
 public protocol ContentProvider {
     var contentResolver : ContentResolver? { get set }
     
+    /// init: Initializer for a ContentProvider instance
+    /// Parameter database: A SQLiteDatabase, the content inside of which the ContentProvider is responsible for 
+    init(database : SQLiteDatabase)
+    
     /// delete: Delete zero or more rows
     /// Parameter uri: The identifying Uri to be deleted
     /// Parameter selection: The selection in parameter marker syntax used to determine which rows will be deleted.
