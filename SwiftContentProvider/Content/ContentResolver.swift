@@ -114,7 +114,7 @@ public class ContentResolver : NSObject {
     }
     
     func getContentAuthority(contentUri: Uri) -> String? {
-        let uris = self.contentRegistrations.keys.array.filter() { (registeredUriString) in
+        let uris = Array(self.contentRegistrations.keys).filter() { (registeredUriString) in
             return contentUri.absoluteString.hasPrefix(registeredUriString)
         }
         
