@@ -38,14 +38,14 @@ public class ContentResolver : NSObject {
         self.initialize()
     }
     
-    public func delete(contentUri: Uri, selection: String?, selectionArgs: [String]?) throws -> Int {
+    public func delete(contentUri: Uri, selection: String? = nil, selectionArgs: [String]? = nil) throws -> Int {
         let contentProvider = try self.getContentProviderFor(contentUri)
         return try contentProvider!.delete(contentUri, selection: selection, selectionArgs: selectionArgs)
     }
     
-    public func delete(contentUri: Uri, selection: String?, selectionArgs: [String : AnyObject]?) throws -> Int {
+    public func delete(contentUri: Uri, selection: String? = nil, namedSelectionArgs: [String : AnyObject]? = nil) throws -> Int {
         let contentProvider = try self.getContentProviderFor(contentUri)
-        return try contentProvider!.delete(contentUri, selection: selection, selectionArgs: selectionArgs)
+        return try contentProvider!.delete(contentUri, selection: selection, selectionArgs: namedSelectionArgs)
     }
     
     public func insert(contentUri: Uri, values: [String : AnyObject]) throws -> Uri {
@@ -58,24 +58,39 @@ public class ContentResolver : NSObject {
         let registrations = self.contentObservers.flatMap() { (element) in
                 return element.1 // Return the Array of registrations
             }
-            .filter() { (registration) in
-                registration.contentUri.isEqual(contentUri) ||
+            .filter() { registration in
+                return registration.contentUri.isEqual(contentUri) ||
                     (registration.notifyForDescendents && contentUriString.hasPrefix(registration.contentUri.absoluteString))
+            }
+            .filter() { registration in
+                return registration.contentObserver != nil
             }
         
         for registration in registrations {
-            registration.contentObserver.onUpdate(contentUri, operation: operation)
+            registration.contentObserver!.onUpdate(contentUri, operation: operation)
         }
     }
     
-    public func query(contentUri: Uri, projection: [String]?, selection: String?, selectionArgs: [String]?, groupBy: String?, having: String?, sort: String?) throws -> Cursor {
+    public func query(contentUri: Uri,
+        projection: [String]? = nil,
+        selection: String? = nil,
+        selectionArgs: [String]? = nil,
+        groupBy: String? = nil,
+        having: String? = nil,
+        sort: String? = nil) throws -> Cursor {
         let contentProvider = try self.getContentProviderFor(contentUri)
         return try contentProvider!.query(contentUri, projection: projection, selection: selection, selectionArgs: selectionArgs, groupBy: groupBy, having: having, sort: sort)
     }
     
-    public func query(contentUri: Uri, projection: [String]?, selection: String?, selectionArgs: [String : AnyObject]?, groupBy: String?, having: String?, sort: String?) throws -> Cursor {
+    public func query(contentUri: Uri,
+        projection: [String]? = nil,
+        selection: String? = nil,
+        namedSelectionArgs: [String : AnyObject]? = nil,
+        groupBy: String? = nil,
+        having: String? = nil,
+        sort: String? = nil) throws -> Cursor {
         let contentProvider = try self.getContentProviderFor(contentUri)
-        return try contentProvider!.query(contentUri, projection: projection, selection: selection, selectionArgs: selectionArgs, groupBy: groupBy, having: having, sort: sort)
+        return try contentProvider!.query(contentUri, projection: projection, selection: selection, selectionArgs: namedSelectionArgs, groupBy: groupBy, having: having, sort: sort)
     }
     
     public func registerContentObserver(contentUri: Uri, notifyForDescendents: Bool, contentObserver: ContentObserver) {
@@ -87,11 +102,11 @@ public class ContentResolver : NSObject {
         }
         
         let registration = ContentRegistration(contentObserver: contentObserver, contentUri: contentUri, notifyForDescendents: notifyForDescendents)
-        guard !registrations!.contains(registration) else {
-            return
-        }
         
-        registrations?.append(registration)
+        registrations!.append(registration)
+        self.contentObservers[key] = registrations!.filter() { registration in
+            return registration.contentObserver != nil
+        }
     }
     
     public func unregisterContentObserver(contentObserver: ContentObserver) {
@@ -99,14 +114,20 @@ public class ContentResolver : NSObject {
         self.contentObservers.removeValueForKey(key)
     }
     
-    public func update(contentUri: Uri, values: [String : AnyObject], selection: String?, selectionArgs: [String]?) throws -> Int {
+    public func update(contentUri: Uri,
+        values: [String : AnyObject],
+        selection: String? = nil,
+        selectionArgs: [String]? = nil) throws -> Int {
         let contentProvider = try self.getContentProviderFor(contentUri)
         return try contentProvider!.update(contentUri, values: values, selection: selection, selectionArgs: selectionArgs)
     }
     
-    public func update(contentUri: Uri, values: [String : AnyObject], selection: String?, selectionArgs: [String : AnyObject]?) throws -> Int {
+    public func update(contentUri: Uri,
+        values: [String : AnyObject],
+        selection: String? = nil,
+        namedSelectionArgs: [String : AnyObject]? = nil) throws -> Int {
         let contentProvider = try self.getContentProviderFor(contentUri)
-        return try contentProvider!.update(contentUri, values: values, selection: selection, selectionArgs: selectionArgs)
+        return try contentProvider!.update(contentUri, values: values, selection: selection, selectionArgs: namedSelectionArgs)
     }
     
     func initialize() {
@@ -152,7 +173,7 @@ func == (one: ContentRegistration, other: ContentRegistration) -> Bool {
 }
 
 class ContentRegistration : Equatable {
-    let contentObserver : ContentObserver
+    weak var contentObserver : ContentObserver?
     let contentUri : Uri
     let notifyForDescendents : Bool
     
