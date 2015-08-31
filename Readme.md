@@ -9,8 +9,8 @@ The ContentProvider is documented in the [WIKI](https://github.com/JeffBNimble/s
 # Installation
 Use [Carthage](https://github.com/Carthage/Carthage). This framework requires the use of Swift 2 and XCode 7 or greater.
 
-Specify the following in your Cartfile to use swift-adapters-fmdb:
+Specify the following in your Cartfile to use swift-content-provider:
 
-```github "JeffBNimble/swift-content-provider" "0.0.13"```
+```github "JeffBNimble/swift-content-provider" "0.0.14"```
 
 This library/framework has its own set of dependencies and you should use ```carthage update```. The framework dependencies are specified in the [Cartfile](https://github.com/JeffBNimble/swift-content-provider/blob/master/Cartfile).
