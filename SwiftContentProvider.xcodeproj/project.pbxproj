@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A52E80C91B6C54E200DE54E7 /* SwiftProtocolsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52E80C81B6C54E200DE54E7 /* SwiftProtocolsCore.framework */; };
+		A529E7C31CF00AE50014584C /* SwiftProtocolsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A529E7C01CF00AE50014584C /* SwiftProtocolsCore.framework */; };
+		A529E7C41CF00AE50014584C /* SwiftProtocolsSQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A529E7C11CF00AE50014584C /* SwiftProtocolsSQLite.framework */; };
+		A529E7C51CF00AE50014584C /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A529E7C21CF00AE50014584C /* SwiftyBeaver.framework */; };
 		A5362D9F1B6448B900769C78 /* ContentObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5362D9E1B6448B900769C78 /* ContentObserver.swift */; };
 		A5362DA11B644A8E00769C78 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5362DA01B644A8E00769C78 /* ContentProvider.swift */; };
 		A59DE1661B8491B3004EF8DD /* ContentProviderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59DE1651B8491B3004EF8DD /* ContentProviderFactory.swift */; };
 		A5B857181B643FC000D19C1B /* SwiftContentProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B857171B643FC000D19C1B /* SwiftContentProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A5B8571F1B643FC000D19C1B /* SwiftContentProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5B857141B643FC000D19C1B /* SwiftContentProvider.framework */; };
 		A5B857241B643FC000D19C1B /* SwiftContentProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B857231B643FC000D19C1B /* SwiftContentProviderTests.swift */; };
-		A5B857301B644EB600D19C1B /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5B8572E1B644EB600D19C1B /* CocoaLumberjackSwift.framework */; };
-		A5B857311B644EB600D19C1B /* SwiftProtocolsSQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5B8572F1B644EB600D19C1B /* SwiftProtocolsSQLite.framework */; };
 		A5B857351B64728400D19C1B /* ContentResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B857341B64728400D19C1B /* ContentResolver.swift */; };
 		A5B857381B6567D700D19C1B /* UriMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B857371B6567D700D19C1B /* UriMatcher.swift */; };
 /* End PBXBuildFile section */
@@ -31,7 +31,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A52E80C81B6C54E200DE54E7 /* SwiftProtocolsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtocolsCore.framework; path = "Carthage/Checkouts/swift-protocols-core/build/Debug-iphoneos/SwiftProtocolsCore.framework"; sourceTree = "<group>"; };
+		A529E7C01CF00AE50014584C /* SwiftProtocolsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtocolsCore.framework; path = Carthage/Build/iOS/SwiftProtocolsCore.framework; sourceTree = "<group>"; };
+		A529E7C11CF00AE50014584C /* SwiftProtocolsSQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtocolsSQLite.framework; path = Carthage/Build/iOS/SwiftProtocolsSQLite.framework; sourceTree = "<group>"; };
+		A529E7C21CF00AE50014584C /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Carthage/Build/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
 		A5362D9E1B6448B900769C78 /* ContentObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentObserver.swift; sourceTree = "<group>"; };
 		A5362DA01B644A8E00769C78 /* ContentProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentProvider.swift; sourceTree = "<group>"; };
 		A59DE1651B8491B3004EF8DD /* ContentProviderFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentProviderFactory.swift; path = SwiftContentProvider/content/ContentProviderFactory.swift; sourceTree = SOURCE_ROOT; };
@@ -41,8 +43,6 @@
 		A5B8571E1B643FC000D19C1B /* SwiftContentProviderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftContentProviderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B857231B643FC000D19C1B /* SwiftContentProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftContentProviderTests.swift; sourceTree = "<group>"; };
 		A5B857251B643FC000D19C1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A5B8572E1B644EB600D19C1B /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = "Carthage/Checkouts/CocoaLumberjack/build/Debug-iphoneos/CocoaLumberjackSwift.framework"; sourceTree = "<group>"; };
-		A5B8572F1B644EB600D19C1B /* SwiftProtocolsSQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtocolsSQLite.framework; path = "Carthage/Checkouts/swift-protocols-sqlite/build/Debug-iphoneos/SwiftProtocolsSQLite.framework"; sourceTree = "<group>"; };
 		A5B857341B64728400D19C1B /* ContentResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentResolver.swift; sourceTree = "<group>"; };
 		A5B857371B6567D700D19C1B /* UriMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UriMatcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -52,9 +52,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A52E80C91B6C54E200DE54E7 /* SwiftProtocolsCore.framework in Frameworks */,
-				A5B857301B644EB600D19C1B /* CocoaLumberjackSwift.framework in Frameworks */,
-				A5B857311B644EB600D19C1B /* SwiftProtocolsSQLite.framework in Frameworks */,
+				A529E7C31CF00AE50014584C /* SwiftProtocolsCore.framework in Frameworks */,
+				A529E7C41CF00AE50014584C /* SwiftProtocolsSQLite.framework in Frameworks */,
+				A529E7C51CF00AE50014584C /* SwiftyBeaver.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,9 +94,9 @@
 		A5B8570A1B643FC000D19C1B = {
 			isa = PBXGroup;
 			children = (
-				A52E80C81B6C54E200DE54E7 /* SwiftProtocolsCore.framework */,
-				A5B8572E1B644EB600D19C1B /* CocoaLumberjackSwift.framework */,
-				A5B8572F1B644EB600D19C1B /* SwiftProtocolsSQLite.framework */,
+				A529E7C01CF00AE50014584C /* SwiftProtocolsCore.framework */,
+				A529E7C11CF00AE50014584C /* SwiftProtocolsSQLite.framework */,
+				A529E7C21CF00AE50014584C /* SwiftyBeaver.framework */,
 				A5B857161B643FC000D19C1B /* SwiftContentProvider */,
 				A5B857221B643FC000D19C1B /* SwiftContentProviderTests */,
 				A5B857151B643FC000D19C1B /* Products */,
@@ -376,6 +376,7 @@
 					"$(PROJECT_DIR)/Carthage/Checkouts/CocoaLumberjack/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/Carthage/Checkouts/swift-protocols-sqlite/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/Carthage/Checkouts/swift-protocols-core/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "SwiftContentProvider/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -400,6 +401,7 @@
 					"$(PROJECT_DIR)/Carthage/Checkouts/CocoaLumberjack/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/Carthage/Checkouts/swift-protocols-sqlite/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/Carthage/Checkouts/swift-protocols-core/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "SwiftContentProvider/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

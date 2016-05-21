@@ -8,7 +8,7 @@
       location = "container:"
       name = "Frameworks">
       <FileRef
-         location = "group:Carthage/Checkouts/CocoaLumberjack/Lumberjack.xcodeproj">
+         location = "group:Carthage/Checkouts/SwiftyBeaver/SwiftyBeaver.xcodeproj">
       </FileRef>
       <FileRef
          location = "group:Carthage/Checkouts/CocoaLumberjack/../swift-protocols-core/SwiftProtocolsCore.xcodeproj">
